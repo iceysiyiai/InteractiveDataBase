@@ -165,4 +165,7 @@ def score_gen (transform, img_input, mask_input, model):
     for i, ind in enumerate(top_k):
         data_csv.append([class_names[ind], 100*y_softmax[0,ind].item()])
         # print(f'Class #{i + 1} - {class_names[ind]} - Logit: {y_output[0,ind]:.2f} - Softmax: {100*y_softmax[0,ind]:.2f}%')
-    return data_csv
+    df = pd.DataFrame(data_csv, columns=['Class', 'Confidence'])
+    # os.makedirs('Documents/GitHub', exist_ok=True)  
+    df.to_csv('out.csv') 
+    # return data_csv
